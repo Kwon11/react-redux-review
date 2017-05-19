@@ -12,14 +12,15 @@ class SearchBar extends Component {//class component. SearchBar now has all the 
   } //constructor: called automatically when new instance of class is created
   //reserved for doing some set up inside of our class
 
-  onInputChange (event) { //on or handle, component, event "on-input-change"
-    console.log(event.target.value);
+  onInputChange (term) { //on or handle, component, event "on-input-change"
+    this.setState({term})
+    this.props.onSearchTermChange(this.state.term);
   }
 
   render () { //class based must have a render method. these are methods of the class
     return (
-        <div>
-          <input value={this.state.term} onChange={(event) => this.setState({term: event.target.value})}/>
+        <div className="search-bar">
+          <input value={this.state.term} onChange={(event) => this.onInputChange(event.target.value)  }/>
         </div>
       );
   } //because value is set by state, it is now a "controlled component"
