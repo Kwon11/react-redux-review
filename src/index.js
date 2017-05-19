@@ -1,15 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import React from 'react'; //go find the library in node_modules called react, and give this script access to React
+import ReactDOM from 'react-dom'; //separate library. React => core components. ReactDOM => the library that inserts into the DOM
+import SearchBar from './components/SearchBar.jsx'; //importing files that WE write need a path. don't need file extension when its js
+import YTSearch from 'youtube-api-search';
 
-import App from './components/app';
-import reducers from './reducers';
 
-const createStoreWithMiddleware = applyMiddleware()(createStore);
+const API_KEY = "AIzaSyCa8F6JRMT1ObKRwQB8o8KkUN4C-tgDic4";
+//const is a variable that doesn't change
+YTSearch({key: API_KEY, term: 'surfboards'}, (data) => {console.log(data)})
 
-ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
-    <App />
-  </Provider>
-  , document.querySelector('.container'));
+const App = () => {//class definition that creates instances of the component
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  );
+}         //that is jsx^^, which is way neater than doing it with just javascript and react
+
+ReactDOM.render(<App />, document.querySelector('.container'));
+//<App/> creates an instance of the class "App"
